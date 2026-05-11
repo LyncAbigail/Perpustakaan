@@ -1,0 +1,90 @@
+body {
+  background: #f6f8fb;
+}
+
+.app-navbar {
+  background: #123b55;
+  box-shadow: 0 2px 12px rgba(18, 59, 85, 0.18);
+}
+
+.brand-logo {
+  width: 132px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.login-shell {
+  min-height: 560px;
+}
+
+.login-logo {
+  width: 154px;
+  height: auto;
+}
+
+.library-visual-panel {
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #e3e8ef;
+  background: #f4efe4;
+}
+
+.library-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dashboard-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 190px;
+  border-radius: 8px;
+  background: #123b55;
+}
+
+.dashboard-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dashboard-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(18, 59, 85, 0.86), rgba(18, 59, 85, 0.35));
+}
+
+.dashboard-hero-copy {
+  position: relative;
+  z-index: 1;
+  color: #fff8e8;
+  padding: 42px;
+}
+
+.card {
+  border-radius: 8px;
+  border-color: #e3e8ef;
+}
+
+.table {
+  background: #fff;
+}
+
+.user-role-select {
+  max-width: 170px;
+}
+
+@media (max-width: 575.98px) {
+  .dashboard-hero-copy {
+    padding: 28px;
+  }
+
+  .brand-logo {
+    width: 120px;
+  }
+}

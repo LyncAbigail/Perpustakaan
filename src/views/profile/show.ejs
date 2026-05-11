@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<h1 class="h3 mb-3">Profile and Fines</h1>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <div class="text-muted">Total fines</div>
+    <div class="display-6">$<%= Number(totalFines).toFixed(2) %></div>
+  </div>
+</div>
+
+<h2 class="h5">Fine history</h2>
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead><tr><th>Book</th><th>Returned</th><th>Fine</th></tr></thead>
+    <tbody>
+      <% fines.forEach((fine) => { %>
+        <tr>
+          <td><%= fine.title %></td>
+          <td><%= fine.return_date ? formatDateWIB(fine.return_date) : '' %></td>
+          <td>$<%= Number(fine.fine_amount).toFixed(2) %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

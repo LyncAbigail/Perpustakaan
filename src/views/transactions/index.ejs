@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<h1 class="h3 mb-3">Transactions</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr><th>User</th><th>Book</th><th>Borrowed</th><th>Returned</th><th>Status</th><th>Fine</th><th class="text-end">Action</th></tr>
+    </thead>
+    <tbody>
+      <% transactions.forEach((item) => { %>
+        <tr>
+          <td><%= item.username %></td>
+          <td><%= item.title %></td>
+          <td><%= item.borrow_date ? formatDateWIB(item.borrow_date) : '' %></td>
+          <td><%= item.return_date ? formatDateWIB(item.return_date) : '' %></td>
+          <td><span class="badge <%= item.status === 'borrowed' ? 'text-bg-warning' : 'text-bg-success' %>"><%= item.status %></span></td>
+          <td>$<%= Number(item.fine_amount).toFixed(2) %></td>
+          <td class="text-end">
+            <% if ((user.role_id === 1 || user.role_id === 2) && item.status === 'borrowed') { %>
+              <form method="post" action="/transactions/<%= item.id %>/return">
+                <button class="btn btn-sm btn-primary">Return</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

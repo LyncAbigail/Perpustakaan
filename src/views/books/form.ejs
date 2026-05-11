@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+
+<h1 class="h3 mb-3"><%= book ? 'Edit book' : 'Add book' %></h1>
+
+<form method="post" action="<%= book ? `/books/${book.id}?_method=PUT` : '/books' %>" class="card card-body shadow-sm">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label" for="title">Title</label>
+      <input class="form-control" id="title" name="title" value="<%= book ? book.title : '' %>" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" for="author">Author</label>
+      <input class="form-control" id="author" name="author" value="<%= book ? book.author : '' %>" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="stock">Stock</label>
+      <input class="form-control" id="stock" name="stock" type="number" min="0" value="<%= book ? book.stock : 0 %>" required>
+    </div>
+    <div class="col-md-8">
+      <label class="form-label" for="category">Category</label>
+      <input class="form-control" id="category" name="category" value="<%= book ? book.category : '' %>" required>
+    </div>
+  </div>
+  <div class="mt-3">
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-outline-secondary" href="/books">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

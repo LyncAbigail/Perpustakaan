@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+
+<h1 class="h3 mb-3">User Management</h1>
+
+<form method="post" action="/admin/users" class="card card-body shadow-sm mb-4">
+  <h2 class="h5">Create user</h2>
+  <div class="row g-3">
+    <div class="col-md-4"><input class="form-control" name="username" placeholder="Username" required></div>
+    <div class="col-md-4"><input class="form-control" name="password" type="password" placeholder="Password" required></div>
+    <div class="col-md-3">
+      <select class="form-select" name="role_id">
+        <% roles.forEach((role) => { %>
+          <option value="<%= role.id %>"><%= role.role_name %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-md-1"><button class="btn btn-primary w-100">Add</button></div>
+  </div>
+</form>
+
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead><tr><th>Username</th><th>Role</th><th class="text-end">Change role</th></tr></thead>
+    <tbody>
+      <% users.forEach((item) => { %>
+        <tr>
+          <td><%= item.username %></td>
+          <td><%= item.role_name %></td>
+          <td class="text-end">
+            <form method="post" action="/admin/users/<%= item.id %>/role" class="d-flex justify-content-end gap-2">
+              <select class="form-select form-select-sm user-role-select" name="role_id">
+                <% roles.forEach((role) => { %>
+                  <option value="<%= role.id %>" <%= role.id === item.role_id ? 'selected' : '' %>><%= role.role_name %></option>
+                <% }) %>
+              </select>
+              <button class="btn btn-sm btn-outline-primary">Save</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

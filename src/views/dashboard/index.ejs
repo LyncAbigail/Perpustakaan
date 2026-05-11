@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+
+<section class="dashboard-hero mb-4">
+  <img src="/images/library-atmosphere.svg" alt="Library shelves and reading room" class="dashboard-hero-image">
+  <div class="dashboard-hero-copy">
+    <h1 class="h3 mb-1">Dashboard</h1>
+    <p class="mb-0">Library Management System</p>
+  </div>
+</section>
+
+<% if (user.role_id === 1) { %>
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card"><div class="card-body"><div class="text-muted">Total users</div><div class="display-6"><%= data.totalUsers %></div></div></div>
+    </div>
+    <div class="col-md-4">
+      <div class="card"><div class="card-body"><div class="text-muted">System logs</div><div class="display-6"><%= data.totalLogs %></div></div></div>
+    </div>
+  </div>
+  <h2 class="h5">Recent activity</h2>
+  <div class="list-group">
+    <% data.recentLogs.forEach((log) => { %>
+      <div class="list-group-item"><%= log.details %></div>
+    <% }) %>
+  </div>
+<% } %>
+
+<% if (user.role_id === 2) { %>
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card"><div class="card-body"><div class="text-muted">Pending returns</div><div class="display-6"><%= data.pendingReturns %></div></div></div>
+    </div>
+  </div>
+  <h2 class="h5">Low stock books</h2>
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead><tr><th>Title</th><th>Author</th><th>Stock</th><th>Category</th></tr></thead>
+      <tbody>
+        <% data.lowStockBooks.forEach((book) => { %>
+          <tr><td><%= book.title %></td><td><%= book.author %></td><td><%= book.stock %></td><td><%= book.category %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<% if (user.role_id === 3) { %>
+  <h2 class="h5">Currently borrowed</h2>
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead><tr><th>Title</th><th>Author</th><th>Borrow date</th></tr></thead>
+      <tbody>
+        <% data.borrowedBooks.forEach((book) => { %>
+          <tr><td><%= book.title %></td><td><%= book.author %></td><td><%= formatDateWIB(book.borrow_date) %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

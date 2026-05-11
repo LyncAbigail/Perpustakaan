@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<div class="row justify-content-center align-items-stretch login-shell">
+  <div class="col-lg-7 d-none d-lg-block">
+    <div class="library-visual-panel h-100">
+      <img src="/images/library-atmosphere.svg" alt="Warm library atmosphere" class="library-hero-image">
+    </div>
+  </div>
+  <div class="col-md-7 col-lg-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+          <img src="/images/library-logo.svg" alt="Library logo" class="login-logo">
+        </div>
+        <h1 class="h4 mb-3">Sign in</h1>
+        <form method="post" action="/login">
+          <div class="mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" id="username" name="username" required autofocus>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" id="password" name="password" type="password" required>
+          </div>
+          <button class="btn btn-primary w-100">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

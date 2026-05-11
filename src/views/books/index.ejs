@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">Book Catalog</h1>
+  <% if (canManageBooks) { %>
+    <a class="btn btn-primary" href="/books/new">Add book</a>
+  <% } %>
+</div>
+
+<form class="row g-2 mb-3" method="get" action="/books">
+  <div class="col-md-5">
+    <input class="form-control" name="q" value="<%= filters.q %>" placeholder="Search title or author">
+  </div>
+  <div class="col-md-4">
+    <select class="form-select" name="category">
+      <option value="">All categories</option>
+      <% categories.forEach((item) => { %>
+        <option value="<%= item.category %>" <%= filters.category === item.category ? 'selected' : '' %>><%= item.category %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-outline-primary w-100">Search</button>
+  </div>
+</form>
+
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr><th>Title</th><th>Author</th><th>Category</th><th>Stock</th><th class="text-end">Actions</th></tr>
+    </thead>
+    <tbody>
+      <% books.forEach((book) => { %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= book.category %></td>
+          <td><%= book.stock %></td>
+          <td class="text-end">
+            <% if (book.stock > 0) { %>
+              <form method="post" action="/transactions/borrow" class="d-inline">
+                <input type="hidden" name="book_id" value="<%= book.id %>">
+                <button class="btn btn-sm btn-success">Borrow</button>
+              </form>
+            <% } %>
+            <% if (canManageBooks) { %>
+              <a class="btn btn-sm btn-outline-secondary" href="/books/<%= book.id %>/edit">Edit</a>
+            <% } %>
+            <% if (user.role_id === 1) { %>
+              <form method="post" action="/books/<%= book.id %>?_method=DELETE" class="d-inline">
+                <button class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>
